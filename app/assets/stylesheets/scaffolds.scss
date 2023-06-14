@@ -1,7 +1,9 @@
 body {
-  background-color: #fff;
+  height: 200px;
+  width: 90%;
+  background-image: repeating-linear-gradient(22deg, rgba(35, 102, 247, 1) 9%, rgba(154, 39, 238, 1) 37%, rgba(255, 34, 87, 1) 73%, rgba(247, 166, 12, 1) 93%);
   color: #333;
-  margin: 33px; }
+  margin: 120px; }
 
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
