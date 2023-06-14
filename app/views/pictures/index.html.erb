@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>投稿一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>投稿者</th>
+      <th>タイトル</th>
+      <th>画像</th>
+      <th>内容</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pictures.each do |picture| %>
+      <tr>
+        <td><%= picture.name %></td>
+        <td><%= picture.title %></td>
+        <td><%= picture.image %></td>
+        <td><%= picture.content %></td>
+        <td><%= link_to '詳細画面へ', picture %></td>
+        <td><%= link_to '編集', edit_picture_path(picture) %></td>
+        <td><%= link_to '削除', picture, method: :delete, data: { confirm: '削除してよろしいですか?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '新しく投稿する', new_picture_path %>
