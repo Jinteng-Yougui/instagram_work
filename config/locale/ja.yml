@@ -1,6 +1,13 @@
----
 ja:
   activerecord:
+    select:
+      prompt: 選択してください
+    submit:
+      create: 登録する
+      submit: 保存する
+      update: 更新 
+      edit: 編集する
+      bavk: 戻る 
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

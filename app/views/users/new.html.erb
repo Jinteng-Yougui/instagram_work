@@ -1,28 +1,21 @@
 <h1>新規登録</h1>
 
 <%= form_with(model: @user, local: true) do |f| %>  
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2>
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  
-  <%= f.label :name %>
+  <%= f.label "名前" %>
   <%= f.text_field :name %>
 
-  <%= f.label :email %>
+  <%= f.label :avatar_path, "プロフィール画像" %>
+  <%= f.file_field :image %>
+
+  <%= f.label "メールアドレス" %>
   <%= f.email_field :email %>
 
-  <%= f.label :password %>
+  <%= f.label "パスワード" %>
   <%= f.password_field :password %>
 
-  <%= f.label :password_confirmation %>
+  <%= f.label "パスワード再入力" %>
   <%= f.password_field :password_confirmation %>
 
-  <%= f.submit "アカウントの作成" %>
+  <p><%= f.submit "アカウントを作成" %></p>
+  <p><%= link_to "登録済みの方はこちら", sessions_new_path %></p>
 <% end %>

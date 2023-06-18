@@ -16,29 +16,34 @@ class PicturesController < ApplicationController
     @picture = Picture.new
   end
 
-  # GET /pictures/1/edit
-  def edit
-    @picture = Picture.find(params[:id])
+  def confirm
+    @picture = current_user.pictures.build(picture_params)
+    render :new if @picture.invalid?
   end
-
+  
   # POST /pictures or /pictures.json
   def create
-    @picture = Picture.new(picture_params)
+    @picture = current_user.pictures.build(picture_params)
     if params[:back]
       render :new
     else
-    respond_to do |format|
-      if @picture.save
-        format.html { redirect_to picture_url(@picture), notice: "投稿しました" }
-        format.json { render :show, status: :created, location: @picture }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @picture.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @picture.save
+          format.html { redirect_to picture_url(@picture), notice: "投稿しました" }
+          format.json { render :show, status: :created, location: @picture }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @picture.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
-
-  # PATCH/PUT /pictures/1 or /pictures/1.json
+    
+    # GET /pictures/1/edit
+  def edit
+    @picture = Picture.find(params[:id])
+  end
+    # PATCH/PUT /pictures/1 or /pictures/1.json
   def update
     respond_to do |format|
       if @picture.update(picture_params)
@@ -61,20 +66,15 @@ class PicturesController < ApplicationController
     end
   end
 
-  def confirm
-    @picture = current_user.pictures.build(picture_params)
-    render :new if @picture.invalid?
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_picture
-      @picture = Picture.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def picture_params
-      params.require(:picture).permit(:name, :title, :image, :image_cache, :content)
-    end
+  def set_picture
+    @picture = Picture.find(params[:id])
   end
+
+  # Only allow a list of trusted parameters through.
+  def picture_params
+    params.require(:picture).permit(:name, :title, :image, :image_cache, :content)
+  end
+
 end
