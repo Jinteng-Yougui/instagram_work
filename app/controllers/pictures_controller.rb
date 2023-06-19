@@ -20,6 +20,7 @@ class PicturesController < ApplicationController
     @picture = current_user.pictures.build(picture_params)
     render :new if @picture.invalid?
       ApplicationMailer.mailer(@picture).deliver
+      ConfirmationMailer.confirmation_mail(@confirmation).deliver
       redirect_to mailers_path, notice: '投稿が完了しました'
   end
   
@@ -79,4 +80,11 @@ class PicturesController < ApplicationController
     params.require(:picture).permit(:name, :title, :image, :image_cache, :content)
   end
 
+  def set_confirmation
+    @confirmation = Confirmation.find(params[:id])
+  end
+
+  def confirmation_params
+    params.require(:confirmation).permit(:name, :email, :content)
+  end
 end
