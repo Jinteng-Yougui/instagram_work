@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :login_required, only: [:new, :create]
+  before_action :own_user, only: [:edit, :update, :destroy]
   def index
     @pictures = Picture.all
   end
@@ -50,5 +50,11 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :image,:image_cache, :password,
                                  :password_confirmation)
+  end
+
+  def own_user
+    if current_user.id != @users.id
+    redirect_to user_path
+    end
   end
 end

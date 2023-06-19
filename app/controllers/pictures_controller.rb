@@ -19,9 +19,7 @@ class PicturesController < ApplicationController
   def confirm
     @picture = current_user.pictures.build(picture_params)
     render :new if @picture.invalid?
-      ApplicationMailer.mailer(@picture).deliver
-      ConfirmationMailer.confirmation_mail(@confirmation).deliver
-      redirect_to mailers_path, notice: '投稿が完了しました'
+      # ApplicationMailer.mailer(@picture).deliver
   end
   
   # POST /pictures or /pictures.json
@@ -32,6 +30,8 @@ class PicturesController < ApplicationController
     else
       respond_to do |format|
         if @picture.save
+          ConfirmationMailer.confirmation_mail(@picture).deliver
+          
           format.html { redirect_to picture_url(@picture), notice: "投稿しました" }
           format.json { render :show, status: :created, location: @picture }
         else
