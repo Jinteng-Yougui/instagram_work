@@ -34,6 +34,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def ensure_current_user
+    if @current_user.id != params[:id].to_i
+      flash[:notice]="権限がありません"
+      redirect_to user_path(@user.id)
+    end
+  end
+
   private
 
   def set_picture
