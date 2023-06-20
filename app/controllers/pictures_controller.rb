@@ -9,6 +9,7 @@ class PicturesController < ApplicationController
   # GET /pictures/1 or /pictures/1.json
   def show
     @picture = Picture.find(params[:id])
+    @favorite = current_user.favorites.find_by(picture_id: @picture.id)
   end
 
   # GET /pictures/new
