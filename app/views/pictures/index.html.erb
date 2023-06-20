@@ -21,7 +21,7 @@
         <td><%= image_tag picture.image.url if picture.image.present? %></td>
         <td><%= picture.content %></td>
         <td><%= link_to '詳細画面へ', picture %></td>
-        <td><%= link_to '編集' if current_user.id != @user.id?, edit_picture_path(picture) %></td>
+        <td><%= link_to '編集', edit_picture_path(picture) %></td>
         <td><%= link_to '削除', picture, method: :delete, data: { confirm: '削除してよろしいですか?' } %></td>
       </tr>
     <% end %>

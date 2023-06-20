@@ -45,6 +45,9 @@ class PicturesController < ApplicationController
     # GET /pictures/1/edit
   def edit
     @picture = Picture.find(params[:id])
+    unless @picture.user == current_user
+      redirect_to pictures_path
+    end
   end
     # PATCH/PUT /pictures/1 or /pictures/1.json
   def update

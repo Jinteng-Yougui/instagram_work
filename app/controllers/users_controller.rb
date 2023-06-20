@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :own_user, only: [:edit, :update, :destroy]
   def index
     @pictures = Picture.all
@@ -18,15 +19,16 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    # @user = User.find(params[:id])
   end
 
   def edit
-    @user = User.find(params[:id])
+    # @user = User.find(params[:id])
+    
   end
 
   def update
-    @user = User.find(params[:id])
+    # @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to user_path(@user.id), notice: "プロフィールを編集しました！"
     else
@@ -43,8 +45,8 @@ class UsersController < ApplicationController
 
   private
 
-  def set_picture
-    @picture = Picture.find(params[:id])
+  def set_user
+    @user = User.find(params[:id])
   end
 
   def user_params
@@ -53,8 +55,8 @@ class UsersController < ApplicationController
   end
 
   def own_user
-    if current_user.id != @users.id
-    redirect_to user_path
+    unless @user == current_user        
+      redirect_to user_path(current_user)
     end
   end
 end
