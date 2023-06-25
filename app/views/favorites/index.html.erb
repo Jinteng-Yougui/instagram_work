@@ -1,0 +1,28 @@
+<h1><%= current_user.name %>さんのお気に入り一覧</h1>
+
+<h2>ログインユーザー名:<%= @current_user.name %></h2>
+
+<p id="notice"><%= notice %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>お気に入り画像一覧</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @favorites.each do |favorite| %>
+      <tr>
+      <td><%= image_tag favorite.post.image.url %></td>
+      <td><%= link_to 'お気に入り画像詳細', favorite %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '戻る', pictures_path %>
+<%= link_to '新しく投稿する', new_picture_path %>

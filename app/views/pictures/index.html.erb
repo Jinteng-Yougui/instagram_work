@@ -10,7 +10,7 @@
       <th>画像</th>
       <th>内容</th>
       <th colspan="3"></th>
-    </tr>
+    </tr> 
   </thead>
 
   <tbody>
@@ -21,8 +21,8 @@
         <td><%= image_tag picture.image.url if picture.image.present? %></td>
         <td><%= picture.content %></td>
         <td><%= link_to '詳細画面へ', picture %></td>
-        <td><%= link_to '編集', edit_picture_path(picture) %></td>
-        <td><%= link_to '削除', picture, method: :delete, data: { confirm: '削除してよろしいですか?' } %></td>
+        <td><%= link_to '編集', edit_picture_path(picture.id) %></td>
+        <td><%= link_to '削除', picture_path(picture.id), method: :delete, data: { confirm: '削除してよろしいですか?' } %></td>
       </tr>
     <% end %>
   </tbody>

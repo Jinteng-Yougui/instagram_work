@@ -25,7 +25,10 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    
+    unless @user == current_user
+      flash[:notice]="権限がありません"
+      redirect_to pictures_path   
+    end
   end
 
   def update

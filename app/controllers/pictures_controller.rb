@@ -46,8 +46,11 @@ class PicturesController < ApplicationController
     # GET /pictures/1/edit
   def edit
     @picture = Picture.find(params[:id])
-    unless @picture.user == current_user
-      redirect_to pictures_path
+    if @picture.user == current_user
+        render :edit
+    else
+      flash[:notice]="権限がありません"
+      redirect_to pictures_path  
     end
   end
     # PATCH/PUT /pictures/1 or /pictures/1.json
@@ -68,7 +71,7 @@ class PicturesController < ApplicationController
     @picture.destroy
 
     respond_to do |format|
-      format.html { redirect_to pictures_url, notice: "削除しました" }
+      format.html { redirect_to pictures_url(@picture), notice: "削除しました" }
       format.json { head :no_content }
     end
   end
