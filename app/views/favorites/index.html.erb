@@ -15,7 +15,7 @@
   <tbody>
     <% @favorites.each do |favorite| %>
       <tr>
-      <td><%= image_tag favorite.post.image.url %></td>
+      <td><%= image_tag favorite.picture.image.url if favorite.picture.image.present? %></td>
       <td><%= link_to 'お気に入り画像詳細', favorite %></td>
       </tr>
     <% end %>
