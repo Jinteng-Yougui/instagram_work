@@ -69,9 +69,8 @@ class PicturesController < ApplicationController
   # DELETE /pictures/1 or /pictures/1.json
   def destroy
     @picture.destroy
-
     respond_to do |format|
-      format.html { redirect_to pictures_url(@picture), notice: "削除しました" }
+      format.html { redirect_to pictures_path, notice: "削除しました" }
       format.json { head :no_content }
     end
   end
@@ -87,6 +86,7 @@ class PicturesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
   def set_picture
     @picture = Picture.find(params[:id])
+    binding.pry
   end
 
   # Only allow a list of trusted parameters through.
